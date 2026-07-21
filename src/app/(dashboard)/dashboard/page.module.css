@@ -1,0 +1,540 @@
+.pageContainer {
+  padding: var(--spacing-8);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-8);
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 4px;
+}
+
+.pageSubtitle {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.highlightSite {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lastUpdate {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.mainLayout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-8);
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--color-border-light);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-bg-alt);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.statValueWrap {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.statusDotActive {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.statSubtext {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.mapCard {
+  border: 1px solid var(--color-border-light);
+  overflow: hidden;
+}
+
+.mapHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.mapTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.mapSubtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.mapToggles {
+  display: flex;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  padding: 4px;
+}
+
+.mapToggleBtn {
+  border: none;
+  background: none;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.activeToggle {
+  background-color: white;
+  color: var(--color-text-main);
+  box-shadow: var(--shadow-sm);
+}
+
+.mapArea {
+  height: 400px;
+  background-color: #064e3b;
+  position: relative;
+  /* Faux heat map simulation */
+  background-image: radial-gradient(circle at 50% 50%, #ef4444 0%, #f59e0b 20%, #10b981 50%, #064e3b 80%);
+}
+
+.mapNodeLabel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.mapControls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mapCtrlBtn {
+  width: 36px;
+  height: 36px;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-main);
+}
+
+.chartCard {
+  border: 1px solid var(--color-border-light);
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-6);
+}
+
+.chartTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.chartSubtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.chartLegend {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dotTemp {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #047857;
+}
+
+.dotHum {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #6ee7b7;
+}
+
+.chartPlaceholder {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartBars {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.barGroup {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.barHum {
+  width: 50%;
+  background-color: #6ee7b7;
+  opacity: 0.8;
+  position: absolute;
+  bottom: 0;
+}
+
+.barTemp {
+  width: 50%;
+  background-color: #047857;
+  opacity: 0.9;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+
+.chartXAxis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  padding-top: 8px;
+}
+
+.activityCard {
+  border: 1px solid var(--color-border-light);
+  overflow: hidden;
+}
+
+.activityHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.activityTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.viewAllLink {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.activityTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.activityTable th {
+  padding: 12px 24px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.activityTable td {
+  padding: 16px 24px;
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.activityTable tr:last-child td {
+  border-bottom: none;
+}
+
+.eventCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.eventIcon {
+  font-size: 1.2rem;
+}
+
+.timeCell {
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+}
+
+.aiPanel {
+  background-color: #047857;
+  color: white;
+  border: none;
+}
+
+.aiTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-6);
+}
+
+.aiAlertBox {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: var(--spacing-6);
+}
+
+.aiAlertLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #6ee7b7;
+  margin-bottom: 8px;
+}
+
+.aiAlertText {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.confidenceBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.confidenceFill {
+  height: 6px;
+  background-color: #6ee7b7;
+  border-radius: 3px;
+  flex: 1;
+}
+
+.confidenceText {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.weatherWidget {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: var(--spacing-8);
+}
+
+.weatherItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.weatherIcon {
+  font-size: 1.5rem;
+}
+
+.weatherLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.weatherDesc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.kpiCircleCard {
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpiCircleTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: var(--spacing-6);
+  width: 100%;
+  text-align: center;
+}
+
+.circularGauge {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.gaugeCenter {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gaugeValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1;
+}
+
+.gaugeStatus {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  margin-top: 4px;
+}
+
+.gaugeSvg {
+  transform: rotate(-90deg);
+}
+
+.gaugeBg {
+  fill: none;
+  stroke: var(--color-border-light);
+  stroke-width: 8;
+}
+
+.gaugeProg {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+@media (max-width: 1024px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+  }
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  .header {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
