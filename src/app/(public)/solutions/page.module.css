@@ -1,0 +1,162 @@
+.solutionsPage {
+  padding-top: var(--spacing-16);
+  padding-bottom: var(--spacing-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3.5rem;
+  }
+}
+
+.highlight {
+  color: var(--color-primary);
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+}
+
+.featuresRow {
+  display: flex;
+  gap: var(--spacing-6);
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-top: var(--spacing-4);
+}
+
+.solutionsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  margin-top: var(--spacing-16);
+}
+
+.solutionRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-12);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .solutionRow {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .reverse {
+    direction: rtl;
+  }
+  
+  .reverse > * {
+    direction: ltr;
+  }
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.solTitle {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.solDesc {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.solFeatures {
+  display: flex;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.featureBox {
+  background-color: var(--color-bg-alt);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+.featureIcon {
+  color: var(--color-primary);
+}
+
+.imageContent {
+  width: 100%;
+}
+
+.imagePlaceholder {
+  height: 350px;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .imagePlaceholder {
+    height: 400px;
+  }
+}
+
+.ctaSection {
+  margin-top: var(--spacing-12);
+}
+
+.ctaCard {
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-16) var(--spacing-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.ctaTitle {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.ctaDesc {
+  font-size: 1.125rem;
+  max-width: 600px;
+  opacity: 0.9;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-4);
+}

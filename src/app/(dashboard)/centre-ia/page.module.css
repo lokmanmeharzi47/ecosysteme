@@ -1,0 +1,448 @@
+.container {
+  padding: var(--spacing-6);
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.titleSection {
+  max-width: 600px;
+}
+
+.titleSection h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: var(--spacing-1);
+}
+
+.titleSection p {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.modelBadge {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: var(--color-success);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modelBadge::before {
+  content: '✓';
+  background-color: var(--color-success);
+  color: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+.gaugesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.gaugeCard {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.gaugeHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-4);
+}
+
+.gaugeVisual {
+  position: relative;
+  width: 120px;
+  height: 60px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-2);
+}
+
+.gaugeArchBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 8px solid var(--color-border-light);
+  box-sizing: border-box;
+}
+
+.gaugeArchFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 8px solid transparent;
+  box-sizing: border-box;
+  transform: rotate(-45deg); /* Base rotation */
+}
+
+.gaugeVisual.critique .gaugeArchFill {
+  border-top-color: var(--color-danger);
+  border-right-color: var(--color-danger);
+  transform: rotate(45deg);
+}
+
+.gaugeVisual.warning .gaugeArchFill {
+  border-top-color: var(--color-warning);
+  border-right-color: transparent;
+  transform: rotate(-15deg);
+}
+
+.gaugeVisual.safe .gaugeArchFill {
+  border-top-color: var(--color-primary);
+  border-right-color: transparent;
+  transform: rotate(-65deg);
+}
+
+.gaugeVisual.modere .gaugeArchFill {
+  border-top-color: #d19e00;
+  border-right-color: transparent;
+  transform: rotate(-35deg);
+}
+
+.gaugeValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 2px;
+}
+
+.critique .gaugeValue { color: var(--color-danger); }
+.warning .gaugeValue { color: var(--color-warning); }
+.safe .gaugeValue { color: var(--color-primary); }
+.modere .gaugeValue { color: #d19e00; }
+
+.gaugeStatus {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.critique .gaugeStatus { color: var(--color-danger); }
+.warning .gaugeStatus { color: var(--color-warning); }
+.safe .gaugeStatus { color: var(--color-primary); }
+.modere .gaugeStatus { color: #d19e00; }
+
+.gaugeMeta {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+.mainLayout {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--spacing-6);
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.riskCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.riskCard {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+}
+
+.riskImage {
+  width: 200px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.riskBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+}
+
+.riskBadge.critique { background-color: var(--color-danger); }
+.riskBadge.alerte { background-color: var(--color-warning); }
+
+.riskContent {
+  padding: var(--spacing-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.riskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-4);
+}
+
+.riskTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 2px;
+}
+
+.riskEst {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.linkIcon {
+  color: var(--color-text-light);
+  cursor: pointer;
+}
+
+.riskStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.riskStat {
+  background-color: #f8fafc;
+  padding: var(--spacing-3);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+.statValue {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.statValue.danger { color: var(--color-danger); }
+.statValue.success { color: var(--color-success); }
+
+.riskTags {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-top: auto;
+}
+
+.tag {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tag.primary {
+  background-color: #fdeded;
+  color: var(--color-danger);
+}
+
+.tag.secondary {
+  background-color: #f0f4f8;
+  color: var(--color-text-light);
+}
+
+.tag.success {
+  background-color: #e8f5ed;
+  color: var(--color-success);
+}
+
+.recoCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.recoCard {
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.recoCard.primary {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.recoCard.primary .recoText {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.recoCard.secondary {
+  background-color: white;
+  border: 1px solid var(--color-success);
+  color: var(--color-text-main);
+}
+
+.recoCard.danger {
+  background-color: white;
+  border: 1px solid var(--color-danger);
+  color: var(--color-text-main);
+}
+
+.recoCard.disabled {
+  background-color: #e2e8f0;
+  color: var(--color-text-light);
+  align-items: center;
+  text-align: center;
+  border: none;
+}
+
+.recoHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.recoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.primary .recoIcon { background-color: rgba(255, 255, 255, 0.2); }
+.secondary .recoIcon { background-color: #e8f5ed; color: var(--color-success); }
+.danger .recoIcon { background-color: #fdeded; color: var(--color-danger); }
+
+.recoTitle {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.recoSubtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.8;
+  display: block;
+}
+
+.recoText {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-main);
+}
+
+.recoBtn {
+  background-color: white;
+  color: var(--color-success);
+  border: none;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: var(--spacing-2);
+}
+
+.recoLink {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-success);
+  cursor: pointer;
+  margin-top: var(--spacing-2);
+}
+
+.danger .recoLink {
+  color: var(--color-danger);
+}
+
+.disabled .recoTitle {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.disabled .recoText {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.disabledBtn {
+  background-color: rgba(255,255,255,0.5);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  margin-top: var(--spacing-2);
+}

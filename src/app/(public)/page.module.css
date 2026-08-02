@@ -1,0 +1,349 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  padding-bottom: var(--spacing-24);
+}
+
+.hero {
+  background: linear-gradient(to bottom, #eaf6ee, var(--color-bg-main));
+  padding: var(--spacing-16) 0;
+  text-align: center;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.heroText {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 4rem;
+  }
+}
+
+.heroSubtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+}
+
+.heroButtons {
+  display: flex;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-4);
+}
+
+.statsRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-8);
+  margin-top: var(--spacing-4);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.dashboardPreview {
+  padding: 0 var(--spacing-4);
+}
+
+.dashboardImage {
+  background-color: var(--color-bg-dark);
+  border-radius: var(--radius-xl);
+  padding: 4px;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  overflow: hidden;
+}
+
+.dashboardPlaceholder {
+  height: 300px;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 768px) {
+  .dashboardPlaceholder {
+    height: 500px;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-12);
+}
+
+@media (min-width: 768px) {
+  .sectionHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.badge {
+  margin-bottom: var(--spacing-4);
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-2);
+}
+
+.sectionSubtitle {
+  color: var(--color-text-muted);
+  max-width: 600px;
+}
+
+.hardwareGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+}
+
+@media (min-width: 768px) {
+  .hardwareGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hardwareGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.productImageWrapper {
+  position: relative;
+  height: 200px;
+  background-color: var(--color-bg-alt);
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+}
+
+.productBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.productContent {
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.productTitle {
+  font-size: 1.125rem;
+}
+
+.productSpecs {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.productFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-2);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.productStatus {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-success);
+}
+
+.videoSection {
+  background-color: var(--color-bg-alt);
+  padding: var(--spacing-16) 0;
+  border-radius: var(--radius-xl);
+  margin: 0 var(--spacing-4);
+}
+
+.videoHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.videoPlayer {
+  width: 100%;
+  max-width: 900px;
+  height: 400px;
+  margin: 0 auto;
+  background-color: var(--color-bg-dark);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.playButton {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.playButton:hover {
+  background-color: var(--color-primary);
+}
+
+.featuresList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-8);
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.featureIcon {
+  color: var(--color-primary);
+}
+
+.coverageSection {
+  padding: var(--spacing-12) 0;
+}
+
+.coverageGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-12);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .coverageGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.coverageText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.coverageTitle {
+  font-size: 2.5rem;
+}
+
+.coverageDesc {
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+}
+
+.coverageStats {
+  display: flex;
+  gap: var(--spacing-8);
+  margin-top: var(--spacing-4);
+}
+
+.cStatValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.cStatLabel {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.coverageMap {
+  background-color: var(--color-bg-dark);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+}
+
+.mapPlaceholder {
+  height: 300px;
+  background: radial-gradient(circle, #1f2937, #111827);
+  border-radius: var(--radius-lg);
+}
+
+.ctaCard {
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-16) var(--spacing-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.ctaTitle {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.ctaDesc {
+  font-size: 1.125rem;
+  max-width: 600px;
+  opacity: 0.9;
+}
