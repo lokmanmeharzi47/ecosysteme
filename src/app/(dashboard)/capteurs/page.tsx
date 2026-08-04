@@ -1,9 +1,13 @@
 import { getSensors } from '@/lib/services/sensors'
+import { getLiveCapteurReading } from '@/lib/services/live-capteur'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Radio, Battery, Signal, Thermometer, Droplets, Wind, CloudFog } from 'lucide-react'
+import { Radio, Battery, Signal } from 'lucide-react'
+import LiveCapteurCard from './LiveCapteurCard'
 
 export default async function SensorsPage() {
- const sensors = await getSensors()
+ // Ne casse jamais la page si Supabase n'est pas configuré / pas de table
+ const sensors = await getSensors().catch(() => [])
+ const live = await getLiveCapteurReading()
 
  return (
   <div className="p-8 space-y-8 bg-slate-50 min-h-screen text-slate-900">
@@ -13,9 +17,11 @@ export default async function SensorsPage() {
    </div>
 
    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <LiveCapteurCard initialReading={live} />
+
     {sensors && sensors.length > 0 ? (
      sensors.map((sensor: any) => (
-      <Card key={sensor.id} className="bg-white border-slate-200 shadow-sm hover:border-emerald-500/50 transition-colors">
+      <Card key={sensor.id} className="bg-white border-slate-200 shadow-sm hover:border-emerald-500/50 transition-colors text-slate-900">
        <CardHeader className="pb-2">
         <CardTitle className="flex justify-between items-center text-sm font-medium text-slate-700">
          {sensor.name}
@@ -46,9 +52,11 @@ export default async function SensorsPage() {
       </Card>
      ))
     ) : (
-     <div className="col-span-full text-center text-slate-500 py-12">
-      No sensors deployed yet.
-     </div>
+     !live && (
+      <div className="col-span-full text-center text-slate-500 py-12">
+       No sensors deployed yet.
+      </div>
+     )
     )}
    </div>
   </div>
