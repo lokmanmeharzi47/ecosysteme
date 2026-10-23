@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { MapContainer as LeafletMap, TileLayer, Marker, Popup, LayersControl, Polygon, useMap } from 'react-leaflet'
+import { MapContainer as LeafletMap, TileLayer, Marker, Popup, LayersControl, LayerGroup, Polygon, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
@@ -45,11 +45,18 @@ export default function MapComponent({
       <LayersControl position="topright">
         {/* Layer 1: Dark Map (Premium Vibe) */}
         <LayersControl.BaseLayer checked name="Dark Map">
-          <TileLayer
-            attribution='Tiles &copy; Esri'
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-            maxZoom={16}
-          />
+          <LayerGroup>
+            <TileLayer
+              attribution='Tiles &copy; Esri'
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+              maxZoom={16}
+            />
+            {/* Noms des villes, routes et lieux par-dessus le fond sombre */}
+            <TileLayer
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
+              maxZoom={16}
+            />
+          </LayerGroup>
         </LayersControl.BaseLayer>
 
         {/* Layer: Standard OpenStreetMap */}
