@@ -41,26 +41,13 @@ export default function MapComponent({
   const defaultCenter: [number, number] = [36.7538, 3.0588]
 
   return (
-    <>
-    <style>{`.osm-dark-tiles { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }`}</style>
     <LeafletMap center={defaultCenter} zoom={13} className="w-full h-full z-0" zoomControl={false}>
       <LayersControl position="topright">
         {/* Layer 1: Dark Map (Premium Vibe) */}
         <LayersControl.BaseLayer checked name="Dark Map">
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-            className="osm-dark-tiles"
-            maxZoom={19}
-          />
-        </LayersControl.BaseLayer>
-
-        {/* Layer: Standard (clair) */}
-        <LayersControl.BaseLayer name="Standard">
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-            maxZoom={19}
+            attribution='&copy; <a href="https://carto.com/">CartoDB</a>'
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
         </LayersControl.BaseLayer>
         
@@ -130,6 +117,5 @@ export default function MapComponent({
         )
       })}
     </LeafletMap>
-    </>
   )
 }
