@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
@@ -20,6 +20,7 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import Image from 'next/image';
+import { createClient } from '@/utils/supabase/client';
 
 const clientNavItems = [
   { name: "Vue d'ensemble", path: '/client/dashboard', icon: LayoutDashboard },
@@ -38,8 +39,33 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const handleLogout = () => {
+  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const supabase = createClient();
+    const loadUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      setUserEmail(user.email ?? '');
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('first_name, last_name')
+        .eq('id', user.id)
+        .single();
+      const fullName = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ');
+      setUserName(fullName || (user.email ?? '').split('@')[0]);
+    };
+    loadUser();
+  }, []);
+
+  const initial = (userName || userEmail || '?').trim().charAt(0).toUpperCase();
+
+  const handleLogout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
     router.push('/connexion');
+    router.refresh();
   };
 
   return (
@@ -59,7 +85,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         {/* Client badge */}
         <div className="mx-4 mt-4 mb-2 px-3 py-2 bg-emerald-50 border border-emerald-100 rounded-xl">
           <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Espace Client</p>
-          <p className="text-xs font-semibold text-emerald-900 mt-0.5 truncate">Karim Benali</p>
+          <p className="text-xs font-semibold text-emerald-900 mt-0.5 truncate">{userName || '...'}</p>
         </div>
 
         {/* Nav */}
@@ -215,16 +241,16 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-neutral-600 hover:bg-neutral-100 border border-neutral-200 transition-colors"
             >
               <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-black text-xs">
-                K
+                {initial}
               </div>
-              <span className="hidden sm:block">Karim Benali</span>
+              <span className="hidden sm:block">{userName || '...'}</span>
               <ChevronDown className="w-3.5 h-3.5" />
             </button>
             {isProfileOpen && (
               <div className="absolute right-0 mt-2.5 w-52 rounded-2xl border border-neutral-200 bg-white shadow-xl py-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="px-4 py-2 border-b border-neutral-100">
                   <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Session active</p>
-                  <p className="text-xs font-bold text-neutral-800 truncate mt-0.5">karim.benali@organisation.dz</p>
+                  <p className="text-xs font-bold text-neutral-800 truncate mt-0.5">{userEmail}</p>
                 </div>
                 <Link
                   href="/client/settings"
