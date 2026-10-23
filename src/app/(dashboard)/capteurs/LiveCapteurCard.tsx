@@ -42,43 +42,43 @@ export default function LiveCapteurCard({ initialReading }: { initialReading: Li
       </CardHeader>
       <CardContent className="space-y-3">
         <div className="flex justify-between items-center text-xs text-slate-400">
-          <span className="flex items-center gap-1"><Radio className="w-3 h-3" /> Sonde NPK</span>
+          <span className="flex items-center gap-1"><Radio className="w-3 h-3 shrink-0" /> Sonde NPK</span>
           {live.measuredAt && (
             <span className="text-[10px]">{new Date(live.measuredAt).toLocaleString('fr-FR')}</span>
           )}
         </div>
 
-        <div className="grid grid-cols-4 gap-3 mt-4 pt-4 border-t border-slate-200">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-4 mt-4 pt-4 border-t border-slate-200">
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Thermometer className="w-3 h-3 text-orange-500" /> Temp.</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Thermometer className="w-3 h-3 shrink-0 text-orange-500" /> Temp.</span>
             <span className="text-sm font-bold">{live.temperature ?? '—'}°C</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Droplets className="w-3 h-3 text-blue-500" /> Hum.</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Droplets className="w-3 h-3 shrink-0 text-blue-500" /> Hum.</span>
             <span className="text-sm font-bold">{live.humidity ?? '—'}%</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><FlaskConical className="w-3 h-3 text-purple-500" /> pH</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><FlaskConical className="w-3 h-3 shrink-0 text-purple-500" /> pH</span>
             <span className="text-sm font-bold">{live.ph ?? '—'}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Zap className="w-3 h-3 text-yellow-500" /> EC</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Zap className="w-3 h-3 shrink-0 text-yellow-500" /> EC</span>
             <span className="text-sm font-bold">{live.ec ?? '—'}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Leaf className="w-3 h-3 text-emerald-600" /> Azote</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Leaf className="w-3 h-3 shrink-0 text-emerald-600" /> Azote</span>
             <span className="text-sm font-bold">{live.azote ?? '—'}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Leaf className="w-3 h-3 text-emerald-600" /> Phosph.</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Leaf className="w-3 h-3 shrink-0 text-emerald-600" /> Phosph.</span>
             <span className="text-sm font-bold">{live.phosphore ?? '—'}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Leaf className="w-3 h-3 text-emerald-600" /> Potass.</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Leaf className="w-3 h-3 shrink-0 text-emerald-600" /> Potass.</span>
             <span className="text-sm font-bold">{live.potassium ?? '—'}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Battery className="w-3 h-3 text-emerald-600" /> Batterie</span>
+            <span className="text-[10px] text-slate-500 flex items-center gap-1"><Battery className="w-3 h-3 shrink-0 text-emerald-600" /> Batterie</span>
             <span className="text-sm font-bold">{live.batterie ?? '—'}%</span>
           </div>
         </div>
