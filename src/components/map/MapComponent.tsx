@@ -46,8 +46,18 @@ export default function MapComponent({
         {/* Layer 1: Dark Map (Premium Vibe) */}
         <LayersControl.BaseLayer checked name="Dark Map">
           <TileLayer
-            attribution='&copy; <a href="https://carto.com/">CartoDB</a>'
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            attribution='Tiles &copy; Esri'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+            maxZoom={16}
+          />
+        </LayersControl.BaseLayer>
+
+        {/* Layer: Standard OpenStreetMap */}
+        <LayersControl.BaseLayer name="Standard">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            maxZoom={19}
           />
         </LayersControl.BaseLayer>
         
