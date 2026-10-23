@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
 import {
  LayoutDashboard,
  Flame,
@@ -53,6 +54,37 @@ export default function DashboardLayout({
  const [isProfileOpen, setIsProfileOpen] = useState(false);
  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
  const [searchQuery, setSearchQuery] = useState("");
+ const [userEmail, setUserEmail] = useState('');
+ const [userName, setUserName] = useState('');
+ const [userRole, setUserRole] = useState('');
+
+ useEffect(() => {
+  const supabase = createClient();
+  const loadUser = async () => {
+   const { data: { user } } = await supabase.auth.getUser();
+   if (!user) return;
+   setUserEmail(user.email ?? '');
+   const { data: profile } = await supabase
+    .from('profiles')
+    .select('first_name, last_name, system_role')
+    .eq('id', user.id)
+    .single();
+   const fullName = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ');
+   setUserName(fullName || (user.email ?? '').split('@')[0]);
+   setUserRole(profile?.system_role ?? '');
+  };
+  loadUser();
+ }, []);
+
+ const handleLogout = async () => {
+  const supabase = createClient();
+  await supabase.auth.signOut();
+  router.push('/connexion');
+  router.refresh();
+ };
+
+ const initials = (userName || userEmail || '?').trim().slice(0, 2).toUpperCase();
+ const roleLabel = userRole === 'admin' ? 'Administrateur' : userRole === 'client' ? 'Client' : userRole;
 
  const notifications = [
   { id: 1, title:"Alerte Critique : Incendie Suspect", desc:"Forêt d'Akfadou (Béjaïa) - Confiance IA 94%", time:"Il y a 5 min", unread: true },
@@ -321,11 +353,11 @@ export default function DashboardLayout({
         className="flex items-center gap-2 p-1 border border-neutral-200 rounded-xl hover:bg-slate-50 transition-colors"
        >
         <div className="w-8 h-8 rounded-lg bg-emerald-700/10 text-emerald-700 flex items-center justify-center shrink-0 font-bold">
-         CD
+         {initials}
         </div>
         <div className="hidden sm:block text-left shrink-0">
-         <div className="text-xs font-bold text-neutral-850 leading-tight">Dr. C. Durand</div>
-         <div className="text-[10px] text-neutral-400 font-semibold leading-none mt-0.5">Admin Scientifique</div>
+         <div className="text-xs font-bold text-neutral-850 leading-tight">{userName || '...'}</div>
+         <div className="text-[10px] text-neutral-400 font-semibold leading-none mt-0.5">{roleLabel}</div>
         </div>
         <ChevronDown className="w-4 h-4 text-neutral-400 hidden sm:block"/>
        </button>
@@ -334,7 +366,7 @@ export default function DashboardLayout({
         <div className="absolute right-0 mt-2.5 w-56 rounded-2xl border border-neutral-200 bg-white shadow-xl py-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
          <div className="px-4 py-2 border-b border-neutral-200">
           <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Session active</p>
-          <p className="text-xs font-bold text-neutral-850 truncate mt-0.5">claire.durand@Ecosystem Monitoring.dz</p>
+          <p className="text-xs font-bold text-neutral-850 truncate mt-0.5">{userEmail}</p>
          </div>
          <Link href="/settings"className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 transition-colors">
           <User className="w-4 h-4 text-neutral-400"/>
@@ -349,10 +381,10 @@ export default function DashboardLayout({
           Documentation
          </a>
          <div className="border-t border-neutral-200 my-1"/>
-         <Link href="/"className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-red-650 hover:bg-red-50 transition-colors">
+         <button onClick={handleLogout} className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-red-650 hover:bg-red-50 transition-colors">
           <LogOut className="w-4 h-4"/>
           Déconnexion
-         </Link>
+         </button>
         </div>
        )}
       </div>
