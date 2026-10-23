@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { MapContainer as LeafletMap, TileLayer, Marker, Popup, LayersControl, LayerGroup, Polygon, useMap } from 'react-leaflet'
+import { MapContainer as LeafletMap, TileLayer, Marker, Popup, LayersControl, Polygon, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
@@ -41,25 +41,21 @@ export default function MapComponent({
   const defaultCenter: [number, number] = [36.7538, 3.0588]
 
   return (
+    <>
+    <style>{`.osm-dark-tiles { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }`}</style>
     <LeafletMap center={defaultCenter} zoom={13} className="w-full h-full z-0" zoomControl={false}>
       <LayersControl position="topright">
         {/* Layer 1: Dark Map (Premium Vibe) */}
         <LayersControl.BaseLayer checked name="Dark Map">
-          <LayerGroup>
-            <TileLayer
-              attribution='Tiles &copy; Esri'
-              url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-              maxZoom={16}
-            />
-            {/* Noms des villes, routes et lieux par-dessus le fond sombre */}
-            <TileLayer
-              url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
-              maxZoom={16}
-            />
-          </LayerGroup>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            className="osm-dark-tiles"
+            maxZoom={19}
+          />
         </LayersControl.BaseLayer>
 
-        {/* Layer: Standard OpenStreetMap */}
+        {/* Layer: Standard (clair) */}
         <LayersControl.BaseLayer name="Standard">
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -134,5 +130,6 @@ export default function MapComponent({
         )
       })}
     </LeafletMap>
+    </>
   )
 }
