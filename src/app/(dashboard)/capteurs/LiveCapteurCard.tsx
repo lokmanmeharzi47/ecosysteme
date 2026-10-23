@@ -32,8 +32,8 @@ export default function LiveCapteurCard({ initialReading }: { initialReading: Li
   if (!live) return null;
 
   return (
-    <Link href="/capteurs/parcelle-nord" className="lg:col-span-2 block">
-    <Card className={`bg-white border-slate-200 shadow-sm hover:border-emerald-500/50 transition-colors cursor-pointer text-slate-900 ${pulsing ? 'ring-2 ring-emerald-400' : ''}`}>
+    <Link href="/capteurs/parcelle-nord" className="block h-full">
+    <Card className={`h-full bg-white border-slate-200 shadow-sm hover:border-emerald-500/50 transition-colors cursor-pointer text-slate-900 ${pulsing ? 'ring-2 ring-emerald-400' : ''}`}>
       <CardHeader className="pb-2">
         <CardTitle className="flex justify-between items-center text-sm font-medium text-slate-700">
           Capteur Sol — Parcelle Nord

@@ -16,12 +16,12 @@ export default async function SensorsPage() {
     <p className="text-sm text-slate-400 mt-1">Real-time telemetry and health status of all deployed LoRaWAN sensors.</p>
    </div>
 
-   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 auto-rows-fr">
     <LiveCapteurCard initialReading={live} />
 
     {sensors && sensors.length > 0 ? (
      sensors.map((sensor: any) => (
-      <Card key={sensor.id} className="bg-white border-slate-200 shadow-sm hover:border-emerald-500/50 transition-colors text-slate-900">
+      <Card key={sensor.id} className="h-full bg-white border-slate-200 shadow-sm hover:border-emerald-500/50 transition-colors text-slate-900">
        <CardHeader className="pb-2">
         <CardTitle className="flex justify-between items-center text-sm font-medium text-slate-700">
          {sensor.name}
