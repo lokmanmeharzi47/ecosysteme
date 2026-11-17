@@ -37,35 +37,86 @@ export default function MapComponent({
   onSensorClick,
   selectedSensorId
 }: MapComponentProps) {
-  // Default to Paris or some central location
+  // Default to Algiers / Northern Algeria
   const defaultCenter: [number, number] = [36.7538, 3.0588]
+  const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
   return (
     <LeafletMap center={defaultCenter} zoom={13} className="w-full h-full z-0" zoomControl={false}>
       <LayersControl position="topright">
-        {/* Layer 1: Dark Map (Premium Vibe) */}
-        <LayersControl.BaseLayer checked name="Dark Map">
-          <TileLayer
-            attribution='&copy; <a href="https://carto.com/">CartoDB</a>'
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-          />
-        </LayersControl.BaseLayer>
-        
-        {/* Layer 2: Satellite */}
-        <LayersControl.BaseLayer name="Satellite">
-          <TileLayer
-            attribution='&copy; ESRI'
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-          />
-        </LayersControl.BaseLayer>
+        {mapboxToken ? (
+          <>
+            {/* Mapbox Layer 1: Dark Mode */}
+            <LayersControl.BaseLayer checked name="Mapbox Sombre">
+              <TileLayer
+                attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url={`https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`}
+                tileSize={512}
+                zoomOffset={-1}
+                maxZoom={19}
+              />
+            </LayersControl.BaseLayer>
 
-        {/* Layer 3: Topographic */}
-        <LayersControl.BaseLayer name="Topographic">
-          <TileLayer
-            attribution='&copy; OpenStreetMap'
-            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-          />
-        </LayersControl.BaseLayer>
+            {/* Mapbox Layer 2: Satellite Rues */}
+            <LayersControl.BaseLayer name="Mapbox Satellite">
+              <TileLayer
+                attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url={`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`}
+                tileSize={512}
+                zoomOffset={-1}
+                maxZoom={19}
+              />
+            </LayersControl.BaseLayer>
+
+            {/* Mapbox Layer 3: Plein Air / Relief Topographique */}
+            <LayersControl.BaseLayer name="Mapbox Relief (Outdoors)">
+              <TileLayer
+                attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`}
+                tileSize={512}
+                zoomOffset={-1}
+                maxZoom={19}
+              />
+            </LayersControl.BaseLayer>
+
+            {/* Mapbox Layer 4: Rues Standard */}
+            <LayersControl.BaseLayer name="Mapbox Standard">
+              <TileLayer
+                attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/512/{z}/{x}/{y}@2x?access_token=${mapboxToken}`}
+                tileSize={512}
+                zoomOffset={-1}
+                maxZoom={19}
+              />
+            </LayersControl.BaseLayer>
+          </>
+        ) : (
+          <>
+            {/* Fallback Layer 1: Dark Map (CartoDB) */}
+            <LayersControl.BaseLayer checked name="Dark Map (CartoDB)">
+              <TileLayer
+                attribution='&copy; <a href="https://carto.com/">CartoDB</a>'
+                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+              />
+            </LayersControl.BaseLayer>
+            
+            {/* Fallback Layer 2: Satellite (ESRI) */}
+            <LayersControl.BaseLayer name="Satellite (ESRI)">
+              <TileLayer
+                attribution='&copy; ESRI'
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+              />
+            </LayersControl.BaseLayer>
+
+            {/* Fallback Layer 3: Topographic (OpenTopoMap) */}
+            <LayersControl.BaseLayer name="Topographique (OpenTopoMap)">
+              <TileLayer
+                attribution='&copy; OpenStreetMap'
+                url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+              />
+            </LayersControl.BaseLayer>
+          </>
+        )}
       </LayersControl>
 
       {/* Render Markers for Sensors */}
@@ -114,6 +165,30 @@ export default function MapComponent({
               </div>
             </Popup>
           </Marker>
+        )
+      })}
+
+      {/* Render Risk Zones */}
+      {riskZones.map((zone) => {
+        if (!zone.geom?.coordinates) return null
+        const rawCoords = zone.geom.type === 'Polygon' ? zone.geom.coordinates[0] : zone.geom.coordinates
+        if (!Array.isArray(rawCoords)) return null
+        const positions: [number, number][] = rawCoords.map((c: any) => [c[1], c[0]])
+        const color = zone.risk_level === 'critical' ? '#ef4444' : zone.risk_level === 'high' ? '#f97316' : '#eab308'
+
+        return (
+          <Polygon
+            key={zone.id}
+            positions={positions}
+            pathOptions={{ color, fillColor: color, fillOpacity: 0.2, weight: 2 }}
+          >
+            <Popup>
+              <div className="p-2">
+                <h4 className="font-bold text-sm">{zone.name || 'Zone à risque'}</h4>
+                <p className="text-xs">Niveau de risque: <span className="font-semibold">{zone.risk_level}</span></p>
+              </div>
+            </Popup>
+          </Polygon>
         )
       })}
     </LeafletMap>
